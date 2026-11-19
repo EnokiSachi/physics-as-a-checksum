@@ -1,0 +1,16 @@
+__pycache__/
+*.pyc
+results/
+runs/
+cache/
+all_reports.txt
+*.pt
+*.engine
+*.onnx
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.fls
+paper/*.fdb_latexmk

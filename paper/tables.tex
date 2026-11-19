@@ -1,0 +1,93 @@
+% requires \usepackage{booktabs}
+% Table 1. Tracker masking of transient activation faults (6000 single bit flips per configuration, sealed test)
+\begin{tabular}{lrrrr}
+\toprule
+configuration & detector output changed & fully masked by tracker & tracking changed & propagated \\
+\midrule
+MOT17 $\cdot$ YOLOv8n & 43.7\% & 96.3\% & 96 & 40 \\
+MOT17 $\cdot$ YOLOv8s & 46.3\% & 96.0\% & 112 & 53 \\
+MOT17 $\cdot$ YOLOv8m & 50.7\% & 96.0\% & 123 & 60 \\
+MOT17 $\cdot$ YOLO11s & 51.5\% & 96.2\% & 116 & 60 \\
+MOT17 $\cdot$ RT-DETR-L & 50.7\% & 95.1\% & 148 & 91 \\
+MOT17 $\cdot$ YOLOv8s $\cdot$ SORT & 46.3\% & 95.9\% & 115 & 14 \\
+MOT20 $\cdot$ YOLOv8s & 59.1\% & 96.3\% & 132 & 117 \\
+KITTI $\cdot$ YOLOv8s & 21.9\% & 94.6\% & 71 & 23 \\
+\bottomrule
+\end{tabular}
+
+% Table 2. Monitor at nominal α = 1% on the sealed test split
+\begin{tabular}{lrrrrrr}
+\toprule
+configuration & FAR fixed [95\% CI] & FAR adaptive & propagated faults & TPR [95\% CI] & damage caught & FAR white-box \\
+\midrule
+MOT17 $\cdot$ YOLOv8n & 0.98\% [0.43, 1.59] & 0.94\% & 40 & 87.5\% [73.9, 94.5] & 95.8\% & 0.23\% \\
+MOT17 $\cdot$ YOLOv8s & 0.51\% [0.15, 0.96] & 0.63\% & 53 & 94.3\% [84.6, 98.1] & 99.3\% & 2.11\% \\
+MOT17 $\cdot$ YOLOv8m & 0.55\% [0.20, 0.97] & 0.47\% & 60 & 81.7\% [70.1, 89.4] & 96.4\% & 2.15\% \\
+MOT17 $\cdot$ YOLO11s & 1.25\% [0.66, 1.95] & 0.70\% & 60 & 90.0\% [79.9, 95.3] & 96.4\% & 3.21\% \\
+MOT17 $\cdot$ RT-DETR-L & 0.78\% [0.36, 1.29] & 0.55\% & 91 & 69.2\% [59.1, 77.8] & 88.6\% & 0.04\% \\
+MOT17 $\cdot$ YOLOv8s $\cdot$ SORT & 0.74\% [0.32, 1.24] & 0.59\% & 14 & 92.9\% [68.5, 98.7] & 96.2\% & 2.11\% \\
+MOT20 $\cdot$ YOLOv8s & 3.65\% [2.24, 5.32] & 0.77\% & 117 & 91.5\% [85.0, 95.3] & 99.4\% & 0.29\% \\
+KITTI $\cdot$ YOLOv8s & 0.51\% [0.24, 0.83] & 0.51\% & 23 & 82.6\% [62.9, 93.0] & 75.3\% & 1.81\% \\
+\bottomrule
+\end{tabular}
+
+% Table 3. End to end at fault rate 1 (exponent and sign bits): HOTA loss recovered / extra compute
+\begin{tabular}{lrrrrrrr}
+\toprule
+configuration & dHOTA unprotected & Ranger & DMR & oracle & white-box & ours & ours + Ranger \\
+\midrule
+MOT17 $\cdot$ YOLOv8n & -1.55 & 18\% / 0.0\% & 17\% / 173.0\% & 97\% / 105.3\% & 95\% / 20.7\% & 99\% / 6.0\% & 102\% / 3.5\% \\
+MOT17 $\cdot$ YOLOv8s & -1.60 & 22\% / 0.0\% & 14\% / 173.6\% & 99\% / 121.4\% & 99\% / 21.6\% & 94\% / 5.3\% & 96\% / 3.3\% \\
+MOT17 $\cdot$ YOLOv8m & -2.99 & 13\% / 0.0\% & 18\% / 175.6\% & 93\% / 147.1\% & 95\% / 20.8\% & 88\% / 5.6\% & 95\% / 3.7\% \\
+MOT17 $\cdot$ YOLO11s & -3.25 & 36\% / 0.0\% & 21\% / 178.6\% & 97\% / 138.3\% & 95\% / 22.0\% & 95\% / 6.2\% & 98\% / 4.0\% \\
+MOT17 $\cdot$ RT-DETR-L & -1.58 & 16\% / 0.0\% & 18\% / 182.8\% & 99\% / 139.7\% & 109\% / 18.9\% & 92\% / 5.4\% & 97\% / 3.8\% \\
+MOT17 $\cdot$ YOLOv8s $\cdot$ SORT & -1.35 & 26\% / 0.0\% & 26\% / 173.6\% & 99\% / 121.4\% & 91\% / 21.6\% & 89\% / 5.6\% & 96\% / 3.6\% \\
+MOT20 $\cdot$ YOLOv8s & -3.32 & 16\% / 0.0\% & 10\% / 186.7\% & 93\% / 182.9\% & 88\% / 20.5\% & 92\% / 9.1\% & 96\% / 6.7\% \\
+KITTI $\cdot$ YOLOv8s & -1.69 & 34\% / 0.0\% & 44\% / 139.8\% & 101\% / 44.4\% & 92\% / 21.1\% & 72\% / 2.6\% & 83\% / 1.6\% \\
+\bottomrule
+\end{tabular}
+
+% Table 4. Bit model 'all' (flipped bit uniform over 16 bits), fault rate 1
+\begin{tabular}{lrrrr}
+\toprule
+configuration & dHOTA unprotected & DMR & oracle & ours \\
+\midrule
+MOT17 $\cdot$ YOLOv8n & -0.82 & 62\% / 165.8\% & 101\% / 84.4\% & 96\% / 2.9\% \\
+MOT17 $\cdot$ YOLOv8s & -1.03 & 28\% / 168.1\% & 100\% / 95.4\% & 99\% / 2.6\% \\
+MOT17 $\cdot$ YOLOv8m & -1.51 & 21\% / 170.8\% & 101\% / 116.3\% & 97\% / 2.4\% \\
+MOT17 $\cdot$ YOLO11s & -1.13 & 34\% / 174.1\% & 100\% / 113.5\% & 93\% / 3.1\% \\
+MOT17 $\cdot$ RT-DETR-L & -0.59 & 36\% / 176.6\% & 100\% / 102.9\% & 102\% / 2.7\% \\
+MOT17 $\cdot$ YOLOv8s $\cdot$ SORT & -0.76 & 51\% / 168.1\% & 100\% / 95.4\% & 96\% / 2.8\% \\
+MOT20 $\cdot$ YOLOv8s & -1.65 & 1\% / 181.5\% & 94\% / 141.5\% & 98\% / 5.5\% \\
+KITTI $\cdot$ YOLOv8s & -0.95 & 69\% / 134.3\% & 100\% / 34.8\% & 73\% / 1.5\% \\
+\bottomrule
+\end{tabular}
+
+% Table 5. Weight checksum (int64 sum of all FP16 words, one reduction per frame)
+\begin{tabular}{lrrrrr}
+\toprule
+detector & parameters & checksum & inference & overhead & random flips caught \\
+\midrule
+YOLOv8n & 3.2 M & 0.15 ms & 13.0 ms & 1.16\% & 200/200 \\
+YOLOv8s & 11.2 M & 0.50 ms & 13.2 ms & 3.75\% & 200/200 \\
+YOLOv8m & 25.9 M & 1.13 ms & 14.7 ms & 7.70\% & 200/200 \\
+YOLO11s & 9.4 M & 0.42 ms & 17.3 ms & 2.43\% & 200/200 \\
+RT-DETR-L & 32.1 M & 1.39 ms & 29.7 ms & 4.70\% & 200/200 \\
+\bottomrule
+\end{tabular}
+
+% Table 6. Development (q2) vs sealed test, combined monitor, α = 1%
+\begin{tabular}{lrrrrrr}
+\toprule
+configuration & FAR dev & FAR test & TPR dev & TPR test & recovered dev & recovered test \\
+\midrule
+MOT17 $\cdot$ YOLOv8n & 0.90\% & 0.98\% & 92.0\% & 87.5\% & 91\% & 99\% \\
+MOT17 $\cdot$ YOLOv8s & 0.90\% & 0.51\% & 96.0\% & 94.3\% & 92\% & 94\% \\
+MOT17 $\cdot$ YOLOv8m & 0.90\% & 0.55\% & 83.5\% & 81.7\% & 89\% & 88\% \\
+MOT17 $\cdot$ YOLO11s & 0.90\% & 1.25\% & 88.7\% & 90.0\% & 81\% & 95\% \\
+MOT17 $\cdot$ RT-DETR-L & 0.90\% & 0.78\% & 61.4\% & 69.2\% & 90\% & 92\% \\
+MOT17 $\cdot$ YOLOv8s $\cdot$ SORT & 0.90\% & 0.74\% & 95.0\% & 92.9\% & 88\% & 89\% \\
+MOT20 $\cdot$ YOLOv8s & 0.92\% & 3.65\% & 95.3\% & 91.5\% & 94\% & 92\% \\
+KITTI $\cdot$ YOLOv8s & 0.89\% & 0.51\% & 80.0\% & 82.6\% & 72\% & 72\% \\
+\bottomrule
+\end{tabular}
